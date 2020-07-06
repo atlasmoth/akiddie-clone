@@ -3,11 +3,10 @@ require("dotenv").config({ path: path.join(__dirname, "/.env") });
 const express = require("express");
 const next = require("next");
 const mongoose = require("mongoose");
-
 const cors = require("cors");
+const userRouter = require("./routers/users");
 
 const dev = process.env.NODE_ENV !== "production";
-
 const app = next({ dev });
 const handle = app.getRequestHandler();
 
@@ -19,16 +18,18 @@ app
     server.use(cors());
     server.use(express.json());
     server.use(express.urlencoded({ extended: true }));
-    server.get("/stuff", (req, res, next) => {
-      res.send("Welcome to the real deal");
+    server.use("/users", userRouter);
+    server.use((error, req, res, next) => {
+      console.log("This is the server's error handler");
+      res.status(error.code || 404).json({
+        success: false,
+        message: error.message || "please verify credentials",
+      });
     });
     server.get("*", (req, res) => {
       return handle(req, res);
     });
-    server.get("/stuff", (req, res, next) => {
-      console.log("Request received");
-      res.send("Welcome to the real deal");
-    });
+
     mongoose
       .connect(process.env.MONGO_URL, {
         useCreateIndex: true,
