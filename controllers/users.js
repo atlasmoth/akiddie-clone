@@ -1,6 +1,7 @@
 const errorController = require("./error");
 const User = require("./../models/User");
 const jwt = require("jsonwebtoken");
+
 const transport = require("./../services/mailer")(
   process.env.EMAIL_USERNAME,
   process.env.EMAIL_PASSWORD
@@ -27,6 +28,7 @@ module.exports.createUser = errorController(async (req, res, next) => {
   const token = jwt.sign({ id: user.email }, process.env.JWT_SECRET, {
     expiresIn: "30min",
   });
+  // generate email for link for verifying new user
   const message = {
     from: "akidieeverywhere@akidie.com",
     to: email,
@@ -68,6 +70,30 @@ module.exports.verifyRegistration = errorController(async (req, res, next) => {
       message: "Invalid credentials please login or create account",
     });
   // generate fresh token for user
+  const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
+    expiresIn: "30d",
+  });
+  res.json({
+    sucess: true,
+    token,
+  });
+});
+
+module.exports.getUser = errorController(async (req, res, next) => {
+  console.log("This shit is running bitch");
+  console.log(req.params);
+  res.send("dummy text");
+});
+
+module.exports.login = errorController(async (req, res, next) => {
+  const { email, password } = req.body;
+
+  if ((!email, !password)) return next({ message: "Invalid credentials" });
+  // fetch user with this email
+  const user = await User.findOne({ email });
+  if (!user || !(await user.checkPassword(password, user.password)))
+    return next({ message: "Invalid credentials" });
+
   const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
     expiresIn: "30d",
   });
