@@ -28,22 +28,15 @@ const userSchema = new mongoose.Schema(
       enum: ["user", "author", "admin"],
       default: "user",
     },
-    location: {
-      type: {
-        type: String,
-        enum: ["Point", "LineString", "Polygon"],
-        default: "Point",
-      },
-      coordinates: [Number],
-    },
   },
   { timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } }
 );
-userSchema.index({ location: "2dsphere" });
-userSchema.pre("save", function (doc) {
+
+userSchema.pre("save", function (next, doc) {
   this.password = bcrypt.hashSync(this.password, 10);
+  next();
 });
 userSchema.methods.checkPassword = function (string, hash) {
   return bcrypt.compare(string, hash);
 };
-module.exports = mongoose.model("user", userSchema);
+module.exports = mongoose.model("User", userSchema);

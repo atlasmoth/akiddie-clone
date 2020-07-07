@@ -20,8 +20,7 @@ app
     server.use(express.urlencoded({ extended: true }));
     server.use("/users", userRouter);
     server.use((error, req, res, next) => {
-      console.log("This is the server's error handler");
-      res.status(error.code || 404).json({
+      res.status(400).json({
         success: false,
         message: error.message || "please verify credentials",
       });

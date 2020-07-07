@@ -1,13 +1,28 @@
 const errorController = require("./error");
 const User = require("./../models/User");
 const jwt = require("jsonwebtoken");
+const util = require("util");
+const transport = require("./../services/mailer")(
+  process.env.EMAIL_USERNAME,
+  process.env.EMAIL_PASSWORD
+);
 
 module.exports.getUsers = errorController(async (req, res, next) => {
-  console.log(req.query);
-  console.log(req.params);
+  const message = {
+    from: "ebuka422@gmail.com",
+    to: "to@email.com",
+    subject: "Testing dummy function",
+    text: "Hey fam, check me out bruh",
+  };
   const users = await User.find({});
-  console.log(users);
-  res.send("Some dummy text for testing");
+  transport.sendMail(message, (err, data) => {
+    if (err) console.log(err);
+    console.log(data);
+  });
+  res.send({
+    sucess: true,
+    users,
+  });
 });
 
 module.exports.createUser = errorController(async (req, res, next) => {
@@ -18,7 +33,6 @@ module.exports.createUser = errorController(async (req, res, next) => {
   }
 
   const user = await User.create({ username, email, password, role });
-  console.log(user);
 
   const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
     expiresIn: "30d",
