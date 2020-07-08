@@ -5,6 +5,8 @@ const next = require("next");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const userRouter = require("./routers/users");
+const bookRouter = require("./routers/books");
+const formidable = require("formidable");
 
 const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
@@ -18,7 +20,10 @@ app
     server.use(cors());
     server.use(express.json());
     server.use(express.urlencoded({ extended: true }));
+
+    server.use(express.static("pdfs"));
     server.use("/users", userRouter);
+    server.use("/books", bookRouter);
     server.use((error, req, res, next) => {
       res.status(400).json({
         success: false,

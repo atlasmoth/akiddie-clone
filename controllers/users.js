@@ -102,3 +102,22 @@ module.exports.login = errorController(async (req, res, next) => {
     token,
   });
 });
+
+module.exports.auth = errorController(async (req, res, next) => {
+  const { authorization } = { ...req.headers };
+  const [, token] = authorization.split(" ");
+  const decoded = await jwt.verify(token, process.env.JWT_SECRET);
+  if (!decoded)
+    return next({
+      code: 400,
+      message: "Invalid credentials please login or create account",
+    });
+  const user = await User.findById(decoded.id);
+  if (!user)
+    return next({
+      code: 400,
+      message: "Invalid credentials please login or create account",
+    });
+  req.user = user;
+  next();
+});

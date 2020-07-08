@@ -36,6 +36,7 @@ const bookSchema = new mongoose.Schema(
         /^(?=(?:\D*\d){10}(?:(?:\D*\d){3})?$)[\d-]+$/,
         "Please include valid ISBN number",
       ],
+      default: "978-7-7635-9132-7",
     },
     image: {
       type: String,

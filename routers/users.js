@@ -6,9 +6,10 @@ const {
   verifyRegistration,
   getUser,
   login,
+  auth,
 } = require("./../controllers/users");
 
-router.route("/").get(getUsers).post(createUser);
+router.route("/").get(auth, getUsers).post(createUser);
 router.route("/auth/verify/:userid/:authid").get(verifyRegistration);
 router.route("/:userid").get(getUser);
 router.route("/login").post(login);
