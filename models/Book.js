@@ -41,6 +41,7 @@ const bookSchema = new mongoose.Schema(
     image: {
       type: String,
     },
+    slug: String,
   },
   { timestamps: true, toObject: { virtuals: true }, toJSON: { virtuals: true } }
 );

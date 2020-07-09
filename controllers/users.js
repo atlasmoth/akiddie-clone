@@ -105,6 +105,11 @@ module.exports.login = errorController(async (req, res, next) => {
 
 module.exports.auth = errorController(async (req, res, next) => {
   const { authorization } = { ...req.headers };
+  if (!authorization)
+    return next({
+      code: 400,
+      message: "Invalid credentials please login or create account",
+    });
   const [, token] = authorization.split(" ");
   const decoded = await jwt.verify(token, process.env.JWT_SECRET);
   if (!decoded)
@@ -120,4 +125,14 @@ module.exports.auth = errorController(async (req, res, next) => {
     });
   req.user = user;
   next();
+});
+
+module.exports.restrictUsers = errorController(async (req, res, next) => {
+  const { role } = req.user;
+  const permitted = ["admin", "author"];
+  if (!permitted.find((item) => item === role)) {
+    return next({ message: "User not authorized to perform this task" });
+  } else {
+    next();
+  }
 });

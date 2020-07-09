@@ -19,6 +19,7 @@ app
     server.use(cors());
     server.use(express.json());
     server.use(express.urlencoded({ extended: true }));
+    server.use(express.static("assets"));
 
     server.use("/users", userRouter);
     server.use("/books", bookRouter);

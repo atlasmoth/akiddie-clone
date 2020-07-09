@@ -1,13 +1,22 @@
 const express = require("express");
-const { getBooks, createBook } = require("./../controllers/books");
-const { auth } = require("./../controllers/users");
+const {
+  getBooks,
+  createBook,
+  getBook,
+  readBook,
+} = require("./../controllers/books");
+const { auth, restrictUsers } = require("./../controllers/users");
 const multer = require("multer");
 const path = require("path");
 
 // setting multer up to receive my docs and safely store them.
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, path.join(process.cwd(), "/pdfs"));
+    if (file.mimetype === "application/pdf") {
+      cb(null, path.join(process.cwd(), "/pdfs"));
+    } else {
+      cb(null, path.join(process.cwd(), "/assets"));
+    }
   },
   filename: function (req, file, cb) {
     cb(null, `${req.user._id}-${file.originalname}`);
@@ -33,11 +42,13 @@ router
   .get(getBooks)
   .post(
     auth,
+    restrictUsers,
     upload.fields([
       { name: "doc", maxCount: 1 },
       { name: "image", maxCount: 1 },
     ]),
     createBook
   );
-
+router.route("/:bookid").get(getBook);
+router.route("/:bookid/read").get(auth, readBook);
 module.exports = router;
