@@ -59,10 +59,18 @@ header.main-header .navigation ul a:hover {
   color: var(--base-light);
 }
 /* first section */
+main > section {
+  color: var(--base-blue);
+}
+main > section:nth-of-type(odd) {
+  background-color: #fff;
+}
+main > section:nth-of-type(even) {
+  background-color: var(--base-body);
+}
 section.first .display {
   display: flex;
-  padding: 2rem;
-  height: 10rem;
+  padding: 1rem;
   align-items: center;
 }
 section.first .display img {
@@ -70,12 +78,55 @@ section.first .display img {
   height: 70px;
   margin-right: 2rem;
 }
-section.first .display h2 {
+
+section.first .display h1 {
   padding: 0px 2rem;
-  color: var(--base-blue);
   border-left: 2px solid var(--base-light);
   height: 6rem;
   line-height: 6rem;
+}
+.underscore {
+  margin: 0px;
+  padding: 1rem;
+  font-size: 60px;
+  font-weight: 400;
+  text-transform: capitalize;
+  word-spacing: 1rem;
+}
+.underscore::after {
+  background-color: var(--base-light);
+  display: block;
+  right: 0px;
+  width: 80px;
+  height: 10px;
+  content: " ";
+}
+.register button {
+  background-color: var(--base-blue);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 0.5rem 1.5rem;
+  cursor: pointer;
+  margin: 0.5rem;
+  outline: none;
+}
+.register button:hover {
+  color: var(--base-light);
+}
+.message {
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 0.8rem;
+}
+.message img {
+  width: 60px;
+  height: 60px;
+  margin: 10px 1rem;
+}
+.message-heading {
+  display: flex;
 }
 /* generic styles */
 .container {
@@ -84,4 +135,14 @@ section.first .display h2 {
 }
 img {
   max-width: 100%;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 1rem;
+  grid-auto-rows: auto;
+}
+.grid div {
+  grid-column-start: 1;
+  grid-column-end: 9;
 }
