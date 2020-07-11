@@ -7,13 +7,14 @@
 :root {
   height: 100%;
   font-size: clamp(0.8rem, 3vw, 1.5rem);
+  --base-blue: #303f91;
+  --base-light: #68e8ec;
+  --base-body: #ebffff;
 }
 body {
   font-family: "Montserrat", sans-serif;
   padding: 0px;
   margin: 0px;
-  background-color: #000;
-  color: #fff;
 }
 button,
 input {
@@ -23,12 +24,64 @@ h1,
 h2,
 h3,
 h4 {
-  font-weight: 500;
+  font-weight: 400;
 }
-main {
-  height: 100vh;
+/* starting with the header */
+header.main-header {
+  background-color: var(--base-blue);
+  color: #eee;
+  font-size: 0.6rem;
   display: flex;
-  flex-direction: column;
+  justify-content: flex-end;
+  padding: max(15px, 0.5rem);
   align-items: center;
-  justify-content: center;
+}
+header.main-header .heading {
+  margin-right: auto;
+}
+header.main-header h1 {
+  margin: 0px;
+}
+
+header.main-header .navigation ul {
+  display: flex;
+  list-style: none;
+  padding: 0px;
+  margin: 0px;
+}
+header.main-header .navigation ul a {
+  color: inherit;
+  text-decoration: none;
+  font-size: 1.2em;
+  padding: 0.8rem;
+}
+header.main-header .navigation ul a:hover {
+  color: var(--base-light);
+}
+/* first section */
+section.first .display {
+  display: flex;
+  padding: 2rem;
+  height: 10rem;
+  align-items: center;
+}
+section.first .display img {
+  width: 70px;
+  height: 70px;
+  margin-right: 2rem;
+}
+section.first .display h2 {
+  padding: 0px 2rem;
+  color: var(--base-blue);
+  border-left: 2px solid var(--base-light);
+  height: 6rem;
+  line-height: 6rem;
+}
+/* generic styles */
+.container {
+  width: min(100vw, 800px);
+  margin: 0 auto;
+}
+img {
+  max-width: 100%;
 }
