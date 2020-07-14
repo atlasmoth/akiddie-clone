@@ -48,5 +48,9 @@ module.exports.readBook = errorController(async (req, res, next) => {
   const book = await Book.findById(bookid);
   if (!book) return next({ message: "Invalid link." });
 
+  if (!fs.existsSync(path.join(process.cwd(), `/pdfs/${book.slug}`))) {
+    return next({ message: "Invalid link." });
+  }
+  console.log("We outchea");
   res.sendFile(path.join(process.cwd(), `/pdfs/${book.slug}`));
 });
