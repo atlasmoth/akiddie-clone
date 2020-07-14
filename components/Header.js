@@ -1,7 +1,16 @@
 import Link from "next/link";
+import Head from "next/head";
+
 export default function Header(props) {
   return (
     <>
+      <Head>
+        <title>Akidie || Clone.</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <meta charSet="utf-8" />
+        <meta name="description" content="An akiddie clone." />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <header className="main-header">
         <div className="heading">
           <h1>Akidie</h1>

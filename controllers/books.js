@@ -2,9 +2,11 @@ const errorController = require("./error");
 const Book = require("./../models/Book");
 const path = require("path");
 const fs = require("fs");
+const setQuery = require("./../services/query");
 
 module.exports.getBooks = errorController(async (req, res, next) => {
-  const books = await Book.find({});
+  const books = await Book.find({}).sort({ createdAt: -1 }).skip(5);
+  console.log(setQuery(undefined, req.query));
   res.json({
     success: true,
     books,
