@@ -42,6 +42,11 @@ const bookSchema = new mongoose.Schema(
       type: String,
     },
     slug: String,
+    price: {
+      type: Number,
+      min: [0, "Price cannot be less than zero"],
+      required: [true, "Please include price"],
+    },
   },
   { timestamps: true, toObject: { virtuals: true }, toJSON: { virtuals: true } }
 );

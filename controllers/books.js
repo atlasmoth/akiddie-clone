@@ -5,8 +5,8 @@ const fs = require("fs");
 const setQuery = require("./../services/query");
 
 module.exports.getBooks = errorController(async (req, res, next) => {
-  const books = await Book.find({}).sort({ createdAt: -1 }).skip(5);
-  console.log(setQuery(undefined, req.query));
+  const books = await setQuery(Book, req.query);
+
   res.json({
     success: true,
     books,
