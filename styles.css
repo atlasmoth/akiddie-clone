@@ -6,24 +6,28 @@
 }
 :root {
   height: 100%;
-  font-size: clamp(0.8rem, 3vw, 1.5rem);
+  font-size: clamp(0.9rem, 2vw, 1.2rem);
   --base-blue: #303f91;
   --base-light: #68e8ec;
   --base-body: #ebffff;
+  min-height: 100%;
 }
 body {
   font-family: "Montserrat", sans-serif;
   padding: 0px;
   margin: 0px;
+  height: 100%;
+  overflow-x: hidden;
 }
-.holder {
+.main {
   display: flex;
   flex-direction: column;
-  background-color: red;
+  min-height: 100vh;
 }
-footer {
-  align-self: flex-end;
+.holder {
+  flex-grow: 1;
 }
+
 button,
 input,
 select {
@@ -81,12 +85,7 @@ header.main-header .navigation ul a:hover {
 main > section {
   color: var(--base-blue);
 }
-main > section:nth-of-type(odd) {
-  background-color: #fff;
-}
-main > section:nth-of-type(even) {
-  background-color: var(--base-body);
-}
+
 section.first .display {
   display: flex;
   padding: 1rem;
@@ -106,11 +105,10 @@ section.first .display h1 {
 }
 .underscore {
   margin: 0px;
-  padding: 1rem;
-  font-size: 60px;
+  padding: 0.5rem;
+  font-size: 3rem;
   font-weight: 400;
   text-transform: capitalize;
-  word-spacing: 1rem;
 }
 .underscore::after {
   background-color: var(--base-light);
@@ -191,11 +189,7 @@ img {
 }
 .grid {
   display: grid;
-  grid-template-columns: repeat(12, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
   gap: 1rem;
-  grid-auto-rows: auto;
-}
-.grid div {
-  grid-column-start: 1;
-  grid-column-end: 9;
+  grid-auto-rows: minmax(10rem, auto);
 }

@@ -1,10 +1,11 @@
 import Header from "../components/Header";
 import { useState } from "react";
-
-export default function signin() {
+export default function signup() {
   const [state, setState] = useState({
+    username: "",
     email: "",
     password: "",
+    role: "",
   });
   function setChange({ target: { name, value } }) {
     setState((current) => ({ ...current, [name]: value }));
@@ -13,9 +14,21 @@ export default function signin() {
     <Header>
       <form className="signin-form container">
         <div className="field">
+          <label htmlFor="username">Username</label>
+          <input
+            type="text"
+            placeholder="Username"
+            id="username"
+            name="username"
+            onChange={setChange}
+            value={state.username}
+            required
+          />
+        </div>
+        <div className="field">
           <label htmlFor="email">Email</label>
           <input
-            type="email"
+            type="emial"
             placeholder="Email"
             id="email"
             name="email"
@@ -37,7 +50,21 @@ export default function signin() {
             required
           />
         </div>
-
+        <div className="field">
+          <label htmlFor="role">Role</label>
+          <select
+            name="role"
+            id="role"
+            onChange={setChange}
+            value={state.role}
+            onChange={setChange}
+          >
+            <optgroup label="Select role">
+              <option value="user">User</option>
+              <option value="author">Author</option>
+            </optgroup>
+          </select>
+        </div>
         <div className="field">
           <button type="submit">Register</button>
         </div>

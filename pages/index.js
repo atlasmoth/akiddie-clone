@@ -21,10 +21,10 @@ export default function Home() {
           </section>
           <section className="second">
             <div className="container">
+              <div className="testimonials">
+                <h2 className="underscore">Testimonials</h2>
+              </div>
               <div className="grid">
-                <div className="testimonials">
-                  <h2 className="underscore">Testimonials</h2>
-                </div>
                 <div className="message">
                   <div className="message-heading">
                     <img src="/demo.svg" alt="" />
