@@ -29,6 +29,11 @@ export default function Header(props) {
                     <a>Sign In</a>
                   </Link>
                 </li>
+                <li>
+                  <Link href="/monographs">
+                    <a>books</a>
+                  </Link>
+                </li>
               </ul>
             </nav>
           </header>
