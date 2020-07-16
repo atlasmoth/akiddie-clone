@@ -1,6 +1,12 @@
 import Header from "../components/Header";
 import Link from "next/link";
+import { useReducer, useContext } from "react";
+import authContext from "./../components/authContext";
+
 export default function Home() {
+  const globalAuth = useContext(authContext);
+  console.log(globalAuth);
+
   return (
     <div className="Home">
       <Header>

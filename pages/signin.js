@@ -1,9 +1,13 @@
 import Header from "../components/Header";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useRouter } from "next/router";
 import Cookies from "js-cookie";
+import authContext from "./../components/authContext";
 
 export default function signin() {
+  const { dispatch } = useContext(authContext);
+  // console.log(stuff);
+
   const router = useRouter();
   const [state, setState] = useState({
     email: "",
@@ -31,7 +35,12 @@ export default function signin() {
       })
     ).json();
     if (res.sucess) {
-      Cookies.set("akidie-auth", res.token);
+      setState({
+        email: "",
+        password: "",
+      });
+      dispatch({ type: "login", token: res.token });
+      router.push(`/monographs`);
     } else {
       console.log(res);
     }

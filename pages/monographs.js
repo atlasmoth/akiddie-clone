@@ -1,5 +1,5 @@
 import Header from "../components/Header";
-import { withRouter } from "next/router";
+import { useRouter } from "next/router";
 import fetch from "isomorphic-unfetch";
 import Book from "../components/Book";
 

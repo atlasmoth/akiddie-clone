@@ -136,3 +136,10 @@ module.exports.restrictUsers = errorController(async (req, res, next) => {
     next();
   }
 });
+
+module.exports.verify = (req, res, next) => {
+  res.send({
+    message: "user logged in",
+    auth: true,
+  });
+};
