@@ -17,6 +17,9 @@ export default function Monograph({ book: { book, success } }) {
           </div>
           <div className="poster">
             <img src={`/${book.image}`} alt="poster" />
+            <Link href="/">
+              <a className="read">Read</a>
+            </Link>
           </div>
         </div>
       </div>
