@@ -1,5 +1,5 @@
 import Header from "../components/Header";
-
+import Link from "next/link";
 export default function Home() {
   return (
     <div className="Home">
@@ -15,7 +15,9 @@ export default function Home() {
                 <h2 className="underscore">Lorem Ipsum dolor sit amet</h2>
               </div>
               <div className="register">
-                <button>Register</button>
+                <Link href="/signup">
+                  <a className="read">Register</a>
+                </Link>
               </div>
             </div>
           </section>

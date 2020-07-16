@@ -8,20 +8,22 @@ export default function Monograph({ book: { book, success } }) {
   return (
     <Header>
       <div className="container">
-        <div className="monograph">
-          <div className="poster-info">
-            <h2>{book.title}</h2>
-            <h3>{book.genre}</h3>
-            <h3>{book.isbn}</h3>
-            <p>{book.description}</p>
+        {success && (
+          <div className="monograph">
+            <div className="poster-info">
+              <h2>{book.title}</h2>
+              <h3>{book.genre}</h3>
+              <h3>{book.isbn}</h3>
+              <p>{book.description}</p>
+            </div>
+            <div className="poster">
+              <img src={`/${book.image}`} alt="poster" />
+              <Link href="/">
+                <a className="read">Read</a>
+              </Link>
+            </div>
           </div>
-          <div className="poster">
-            <img src={`/${book.image}`} alt="poster" />
-            <Link href="/">
-              <a className="read">Read</a>
-            </Link>
-          </div>
-        </div>
+        )}
       </div>
     </Header>
   );
@@ -41,7 +43,7 @@ export async function getServerSideProps(context) {
 
   return {
     props: {
-      book,
+      book: JSON.parse(JSON.stringify(book)),
     },
   };
 }
