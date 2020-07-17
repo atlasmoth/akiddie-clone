@@ -20,11 +20,6 @@ export default function Monographs({ books: { books, success } }) {
 }
 
 export async function getServerSideProps(context) {
-  const auth = context.req.headers.cookie
-    .split("; ")
-    .find((item) => item.includes("akidie-auth"));
-  const [, token] = auth.split("=");
-  console.log(token);
   const books = await (
     await fetch(`http://localhost:3000/books`, {
       method: "GET",

@@ -147,14 +147,17 @@ section.first .display h1 {
 /* fixing forms */
 .signin-form {
   padding: 1.5rem;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 10px;
-  grid-auto-rows: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
 .signin-form .field {
   display: flex;
   flex-direction: column;
+  flex-basis: 350px;
+  flex-shrink: 0;
+  flex-grow: 1;
+  margin: 15px;
 }
 
 .signin-form .field:last-of-type button {

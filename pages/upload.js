@@ -1,9 +1,11 @@
 import Header from "../components/Header";
 import { useState } from "react";
-import { useRouter } from "next/router";
 import Cookies from "js-cookie";
 
+import { useRouter } from "next/router";
+
 export default function Upload() {
+  const router = useRouter();
   const [state, setState] = useState({
     title: "",
     isbn: "",
@@ -16,9 +18,8 @@ export default function Upload() {
   }
   async function handleForm(e) {
     e.preventDefault();
-    console.log("This function is indeed running");
+
     if (Cookies.get("akidie-auth")) {
-      console.log("This bit is running");
       const data = new FormData(e.target);
 
       fetch(`http://localhost:3000/books`, {
@@ -29,8 +30,22 @@ export default function Upload() {
         body: data,
       })
         .then((res) => res.json())
-        .then(console.log)
+        .then((bookData) => {
+          setState({
+            title: "",
+            isbn: "",
+            price: 0,
+            genre: "",
+            description: "",
+          });
+          router.push(
+            "/monograph[monograph]",
+            `/monograph/${bookData.book._id}`
+          );
+        })
         .catch(console.log);
+    } else {
+      router.push("/signin");
     }
   }
   return (
