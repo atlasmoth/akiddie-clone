@@ -15,8 +15,11 @@ module.exports.getBooks = errorController(async (req, res, next) => {
 
 module.exports.createBook = errorController(async (req, res, next) => {
   //  this is really stressing me out
-  const { title, description } = req.body;
-  if (!title) return next({ message: "Please provide title" });
+  console.log("This is indeed running");
+  console.log(req.body);
+  const { title, description, price, genre } = req.body;
+  if (!title || !price)
+    return next({ message: "Please provide complete details." });
   const { doc, image } = req.files;
   const docName = doc[0].filename;
   const imageName = image[0].filename;
@@ -26,6 +29,9 @@ module.exports.createBook = errorController(async (req, res, next) => {
     description,
     slug: docName,
     image: imageName,
+    price,
+    genre,
+    author: req.user._id,
   });
   res.json({
     success: true,
@@ -51,6 +57,6 @@ module.exports.readBook = errorController(async (req, res, next) => {
   if (!fs.existsSync(path.join(process.cwd(), `/pdfs/${book.slug}`))) {
     return next({ message: "Invalid link." });
   }
-  console.log("We outchea");
+
   res.sendFile(path.join(process.cwd(), `/pdfs/${book.slug}`));
 });
