@@ -20,7 +20,8 @@
     "next": "9.4.4",
     "nodemailer": "^6.4.10",
     "react": "16.13.1",
-    "react-dom": "16.13.1"
+    "react-dom": "16.13.1",
+    "react-pdf": "^4.1.0"
   },
   "devDependencies": {
     "cross-env": "^7.0.2"
