@@ -1,12 +1,11 @@
 import Header from "../components/Header";
 import { useState, useContext } from "react";
 import { useRouter } from "next/router";
-import Cookies from "js-cookie";
+
 import authContext from "./../components/authContext";
 
 export default function signin() {
   const { dispatch } = useContext(authContext);
-  // console.log(stuff);
 
   const router = useRouter();
   const [state, setState] = useState({

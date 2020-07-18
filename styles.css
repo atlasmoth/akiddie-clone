@@ -19,6 +19,22 @@ body {
   height: 100%;
   overflow-x: hidden;
 }
+h1 a {
+  text-decoration: none;
+  color: inherit;
+}
+button.logout {
+  border: none;
+  color: var(--base-blue);
+  background-color: #fff;
+  padding: 0.5rem;
+  outline: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+button.logout:hover {
+  color: var(--base-light);
+}
 .main {
   display: flex;
   flex-direction: column;
@@ -71,6 +87,7 @@ header.main-header .navigation ul {
   list-style: none;
   padding: 0px;
   margin: 0px;
+  align-items: center;
 }
 header.main-header .navigation ul a {
   color: inherit;

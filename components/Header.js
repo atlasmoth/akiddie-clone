@@ -1,7 +1,14 @@
 import Link from "next/link";
 import Head from "next/head";
+import { useContext } from "react";
+import authContext from "./../components/authContext";
 
 export default function Header(props) {
+  const { auth, dispatch } = useContext(authContext);
+  async function handleLogOut(e) {
+    e.preventDefault();
+    dispatch({ type: "logout" });
+  }
   return (
     <>
       <Head>
@@ -15,7 +22,11 @@ export default function Header(props) {
         <div className="holder">
           <header className="main-header">
             <div className="heading">
-              <h1>Akidie</h1>
+              <h1>
+                <Link href="/">
+                  <a>Akidie</a>
+                </Link>
+              </h1>
             </div>
             <nav className="navigation">
               <ul>
@@ -30,10 +41,22 @@ export default function Header(props) {
                   </Link>
                 </li>
                 <li>
+                  <Link href="/upload">
+                    <a>upload</a>
+                  </Link>
+                </li>
+                <li>
                   <Link href="/monographs">
                     <a>books</a>
                   </Link>
                 </li>
+                {auth && (
+                  <li>
+                    <button onClick={handleLogOut} className="logout">
+                      Log out
+                    </button>
+                  </li>
+                )}
               </ul>
             </nav>
           </header>

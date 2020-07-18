@@ -9,9 +9,12 @@ function reducer(state, action) {
       return { ...state, auth: action.auth };
     }
     case "login": {
-      console.log("This has been called");
       Cookies.set("akidie-auth", action.token);
       return { ...state, auth: true };
+    }
+    case "logout": {
+      Cookies.remove("akidie-auth");
+      return { ...state, auth: false };
     }
     default: {
       return { ...state };
@@ -33,7 +36,7 @@ export default function MyApp({ Component, pageProps }) {
       })
         .then((res) => res.json())
         .then((data) => {
-          dispatch({ type: "auth", auth: data.auth });
+          dispatch({ type: "auth", auth: data.auth ? data.auth : false });
         })
         .catch(console.log);
     }

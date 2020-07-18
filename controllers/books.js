@@ -51,6 +51,7 @@ module.exports.getBook = errorController(async (req, res, next) => {
 
 module.exports.readBook = errorController(async (req, res, next) => {
   const { bookid } = req.params;
+
   const book = await Book.findById(bookid);
   if (!book) return next({ message: "Invalid link." });
 

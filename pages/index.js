@@ -5,7 +5,6 @@ import authContext from "./../components/authContext";
 
 export default function Home() {
   const globalAuth = useContext(authContext);
-  console.log(globalAuth);
 
   return (
     <div className="Home">

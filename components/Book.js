@@ -11,7 +11,7 @@ export default function Book({ data }) {
       <p>Price {data.price || "N/A"}</p>
       <p>{data.description}</p>
       <Link href="/monograph/[monograph]" as={`/monograph/${data._id}`}>
-        <a className="read">Read</a>
+        <a className="read">See More</a>
       </Link>
     </div>
   );
