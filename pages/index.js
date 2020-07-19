@@ -18,6 +18,15 @@ export default function Home() {
               </div>
               <div className="lede">
                 <h2 className="underscore">Lorem Ipsum dolor sit amet</h2>
+                <span>
+                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                  Beatae nobis voluptate praesentium incidunt suscipit error in
+                  dolorum esse facere corrupti quisquam culpa aliquid aspernatur
+                  consequatur modi reiciendis inventore, dolor sit sint ab quod
+                  laudantium optio ipsum illum. Deleniti, accusamus,
+                  necessitatibus eveniet sequi molestiae quis dolor esse fugit
+                  quae quo eius.
+                </span>
               </div>
               <div className="register">
                 <Link href="/signup">

@@ -3,7 +3,7 @@ const router = express.Router();
 const {
   getUsers,
   createUser,
-  verifyRegistration,
+  // verifyRegistration,
   getUser,
   login,
   auth,
@@ -12,7 +12,7 @@ const {
 
 router.route("/").get(auth, getUsers).post(createUser);
 router.route("/verify").get(auth, verify);
-router.route("/auth/verify/:userid/:authid").get(verifyRegistration);
+// router.route("/auth/verify/:userid/:authid").get(verifyRegistration);
 router.route("/:userid").get(getUser);
 router.route("/login").post(login);
 

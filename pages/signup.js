@@ -1,5 +1,8 @@
 import Header from "../components/Header";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import authContext from "./../components/authContext";
+import { useRouter } from "next/router";
+
 export default function signup() {
   const [state, setState] = useState({
     username: "",
@@ -7,12 +10,49 @@ export default function signup() {
     password: "",
     role: "",
   });
+  const { dispatch } = useContext(authContext);
+  const router = useRouter();
+
   function setChange({ target: { name, value } }) {
     setState((current) => ({ ...current, [name]: value }));
   }
+  async function submitForm(e) {
+    e.preventDefault();
+    const url = `${location.origin}/users`;
+
+    fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(state), // body data type must match "Content-Type" header
+    })
+      .then((res) => {
+        if (res.ok && res.status === 200) {
+          return res.json();
+        } else {
+          throw new Error("Login error");
+        }
+      })
+      .then((data) => {
+        dispatch({ type: "login", token: data.token });
+        setState({
+          username: "",
+          email: "",
+          password: "",
+          role: "",
+        });
+        router.push(`/monographs`);
+      })
+      .catch((e) => {
+        console.log("This has just run");
+        console.log(e);
+        // location.reload();
+      });
+  }
   return (
     <Header>
-      <form className="signin-form container">
+      <form className="signin-form container" onSubmit={submitForm}>
         <div className="field">
           <label htmlFor="username">Username</label>
           <input

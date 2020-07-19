@@ -1,5 +1,4 @@
 import Header from "../components/Header";
-import { useRouter } from "next/router";
 import fetch from "isomorphic-unfetch";
 import Book from "../components/Book";
 
@@ -21,7 +20,7 @@ export default function Monographs({ books: { books, success } }) {
 
 export async function getServerSideProps(context) {
   const books = await (
-    await fetch(`http://localhost:3000/books`, {
+    await fetch(`${context.req.protocol}://${context.req.get("host")}/books`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

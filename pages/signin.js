@@ -17,19 +17,14 @@ export default function signin() {
   }
   async function submitForm(e) {
     e.preventDefault();
-    const url = `http://localhost:3000/users/login`;
+    const url = `${location.origin}/users/login`;
     const res = await (
       await fetch(url, {
         method: "POST",
-        mode: "cors",
-        cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-        credentials: "same-origin", // include, *same-origin, omit
         headers: {
           "Content-Type": "application/json",
           // 'Content-Type': 'application/x-www-form-urlencoded',
         },
-        redirect: "follow", // manual, *follow, error
-        referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
         body: JSON.stringify(state), // body data type must match "Content-Type" header
       })
     ).json();
@@ -74,7 +69,7 @@ export default function signin() {
         </div>
 
         <div className="field">
-          <button type="submit">Register</button>
+          <button type="submit">Log in</button>
         </div>
       </form>
     </Header>

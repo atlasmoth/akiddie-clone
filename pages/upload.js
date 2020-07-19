@@ -22,7 +22,7 @@ export default function Upload() {
     if (Cookies.get("akidie-auth")) {
       const data = new FormData(e.target);
 
-      fetch(`http://localhost:3000/books`, {
+      fetch(`${location.origin}/books`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${Cookies.get("akidie-auth")}`,

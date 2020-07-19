@@ -31,7 +31,7 @@ export default function Read(props) {
 
   useEffect(() => {
     fetch(
-      `http://localhost:3000/books/${router.asPath.split("/read/")[1]}/read`,
+      `${location.origin}/books/${location.pathname.split("/read/")[1]}/read`,
       {
         method: "GET",
         headers: {
@@ -99,14 +99,6 @@ export default function Read(props) {
       </div>
     </Header>
   );
-}
-
-export async function getServerSideProps() {
-  return {
-    props: {
-      beans: "man, i love beans",
-    },
-  };
 }
 
 function toBase(streamObj) {

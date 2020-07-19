@@ -27,7 +27,7 @@ export default function MyApp({ Component, pageProps }) {
 
   useEffect(() => {
     if (Cookies.get("akidie-auth")) {
-      fetch(`http://localhost:3000/users/verify`, {
+      fetch(`${location.origin}/users/verify`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

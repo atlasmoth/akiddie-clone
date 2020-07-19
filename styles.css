@@ -5,8 +5,8 @@
   box-sizing: border-box;
 }
 :root {
-  height: 100%;
-  font-size: clamp(0.9rem, 2vw, 1.2rem);
+  min-height: 100%;
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
   --base-blue: #303f91;
   --base-light: #68e8ec;
   --base-body: #ebffff;
@@ -17,7 +17,6 @@ body {
   padding: 0px;
   margin: 0px;
   height: 100%;
-  overflow-x: hidden;
 }
 h1 a {
   text-decoration: none;
@@ -240,8 +239,9 @@ section.first .display h1 {
 /* generic styles */
 
 .container {
-  width: min(100vw, 960px);
+  max-width: 960px;
   margin: 0 auto;
+  padding: 0.5rem;
 }
 img {
   max-width: 100%;
