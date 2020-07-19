@@ -2,10 +2,12 @@ import Header from "../../components/Header";
 import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 import { Document, Page } from "react-pdf";
+import { useRouter } from "next/router";
 import { pdfjs } from "react-pdf";
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 export default function Read(props) {
+  const router = useRouter();
   const [state, setState] = useState({ data: undefined, loading: true });
 
   const [numPages, setNumPages] = useState(null);
@@ -28,12 +30,15 @@ export default function Read(props) {
   }
 
   useEffect(() => {
-    fetch(`http://localhost:3000/books/5f1202010b64ff1374114ece/read`, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${Cookies.get("akidie-auth")}`,
-      },
-    })
+    fetch(
+      `http://localhost:3000/books/${router.asPath.split("/read/")[1]}/read`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${Cookies.get("akidie-auth")}`,
+        },
+      }
+    )
       .then((res) => {
         if (res.ok && res.status === 200) {
           return res.blob();

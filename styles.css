@@ -194,6 +194,12 @@ section.first .display h1 {
   text-decoration: none;
   margin: 0.5rem;
   display: inline-block;
+  cursor: pointer;
+  outline: none;
+  border: none;
+}
+.read:hover {
+  color: var(--base-light);
 }
 .signin-form .field:last-of-type button:hover {
   color: var(--base-light);
