@@ -45,9 +45,7 @@ export default function signup() {
         router.push(`/monographs`);
       })
       .catch((e) => {
-        console.log("This has just run");
-        console.log(e);
-        // location.reload();
+        location.reload();
       });
   }
   return (

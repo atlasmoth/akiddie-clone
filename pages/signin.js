@@ -1,7 +1,6 @@
 import Header from "../components/Header";
 import { useState, useContext } from "react";
 import { useRouter } from "next/router";
-
 import authContext from "./../components/authContext";
 
 export default function signin() {
@@ -17,27 +16,33 @@ export default function signin() {
   }
   async function submitForm(e) {
     e.preventDefault();
-    const url = `${location.origin}/users/login`;
-    const res = await (
-      await fetch(url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          // 'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: JSON.stringify(state), // body data type must match "Content-Type" header
+    const url = `${location.origin}/users`;
+
+    fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(state), // body data type must match "Content-Type" header
+    })
+      .then((res) => {
+        if (res.ok && res.status === 200) {
+          return res.json();
+        } else {
+          throw new Error("Login error");
+        }
       })
-    ).json();
-    if (res.sucess) {
-      setState({
-        email: "",
-        password: "",
+      .then((data) => {
+        dispatch({ type: "login", token: data.token });
+        setState({
+          email: "",
+          password: "",
+        });
+        router.push(`/monographs`);
+      })
+      .catch((e) => {
+        location.reload();
       });
-      dispatch({ type: "login", token: res.token });
-      router.push(`/monographs`);
-    } else {
-      console.log(res);
-    }
   }
   return (
     <Header>
