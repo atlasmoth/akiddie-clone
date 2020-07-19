@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build": "NODE_ENV=development server.js",
+    "build": "NODE_ENV=development next build",
     "start": "NODE_ENV=development next start",
     "dev": "cross-env NODE_ENV=development nodemon server.js"
   },
